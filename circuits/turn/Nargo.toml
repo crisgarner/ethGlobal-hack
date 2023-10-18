@@ -1,7 +1,7 @@
 [package]
-name="next_foundry"
+name="turn"
 type="bin"
-authors = ["critesjosh"]
+authors = ["crisgarner"]
 compiler_version = "~0.11.0"
 
 [dependencies]

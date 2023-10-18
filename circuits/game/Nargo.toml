@@ -1,0 +1,7 @@
+[package]
+name="game"
+type="bin"
+authors = ["crisgarner"]
+compiler_version = "~0.11.0"
+
+[dependencies]

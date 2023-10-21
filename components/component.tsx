@@ -3,10 +3,10 @@ import { useState, useEffect, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 import { ethers } from 'ethers';
 import React from 'react';
-
+import { Crs, Barretenberg, RawBuffer  } from "@aztec/bb.js";
 import { Noir } from '@noir-lang/noir_js';
 import { BarretenbergBackend } from '@noir-lang/backend_barretenberg';
-import circuit from '../circuits/target/next_foundry.json';
+import circuit from '../circuits/turn/target/turn.json';
 import circuitContract from '../out/Starter.sol/Starter.json';
 
 function Component() {
@@ -14,7 +14,7 @@ function Component() {
   const [proof, setProof] = useState(Uint8Array.from([]));
   const [noir, setNoir] = useState<Noir | null>(null);
   const [backend, setBackend] = useState<BarretenbergBackend | null>(null);
-  const contractAddress = ''; // Edit this to the deployed contract address
+   const contractAddress = ''; // Edit this to the deployed contract address
 
   // Handles input state
   const handleChange = e => {
@@ -25,7 +25,12 @@ function Component() {
   // Calculates proof
   const calculateProof = async () => {
     const calc = new Promise(async (resolve, reject) => {
-      const proof = await noir!.generateFinalProof(input);
+        const api = await Barretenberg.new(/* num_threads */ 1);
+        const input = Buffer.from('1');
+        const result = await api.blake2s(input);
+        await api.destroy();
+        console.log(result);
+      const proof = await noir!.generateFinalProof({hash:result, turn:input});
       console.log('Proof created: ', proof);
       setProof(proof);
       resolve(proof);

@@ -1,20 +1,18 @@
-use dep::std::hash::pedersen;
+use dep::std::hash::blake2s;
 use dep::std;
 
-fn check_valid(turns: [Field; 6]){
-    for i in 0..5 {
-        assert(turns[i] as u1 < 3 ); // {0,1,2} = {rock, paper, scissors}
-    }
-}
+// fn check_valid(turns: [Field; 6]){
+//     for i in 0..5 {
+//         assert(turns[i] as u1 < 3 ); // {0,1,2} = {rock, paper, scissors}
+//     }
+// }
 
-fn main(hash: pub Field, turns: [Field; 6], turn: Field) {
-    check_valid(turns);
+fn main(hash: pub [u8; 32], turn: u8 ) {
     assert(turn as u1 < 3 ); // {0,1,2} = {rock, paper, scissors}
     ///TODO: check for win
-    let computed_hash = pedersen(turns);
-    assert(hash == computed_hash[0]);
+    let computed_hash = blake2s([turn]);
+    assert(hash == computed_hash);
 }
-
 
 // #[test]
 // fn test_generate() {

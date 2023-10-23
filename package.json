@@ -12,7 +12,7 @@
   "dependencies": {
     "@aztec/bb.js": "^0.9.0",
     "@noir-lang/backend_barretenberg": "^0.7.10",
-    "@noir-lang/noir_js": "^0.16.0",
+    "@noir-lang/noir_js": "^0.17.0",
     "ethers": "^6.8.0",
     "next": "13.5.4",
     "react": "^18",
